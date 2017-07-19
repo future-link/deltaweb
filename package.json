@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Petitsurume/deltaweb#readme",
   "dependencies": {
     "babel-eslint": "^7.2.3",
-    "eslint": "^4.2.0"
+    "eslint": "^4.2.0",
+    "express": "^4.15.3"
   }
 }
