@@ -12,7 +12,8 @@ module.exports = function(endpoint, params) {
         body: JSON.stringify(params),
         headers: {
             "Content-Type": "application/json"
-        }
+        },
+        credentials: 'include'
     }).then(function(res) {
         return res.json()
     })
