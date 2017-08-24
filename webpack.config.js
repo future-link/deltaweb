@@ -8,7 +8,8 @@ module.exports = {
     },
     plugins: [
         new webpack.ProvidePlugin({
-            riot: "riot"
+            riot: "riot",
+            apiCall: __dirname+"/src/client/api-call.js"
         })
     ],
     module: {

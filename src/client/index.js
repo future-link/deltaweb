@@ -1,6 +1,6 @@
 const riot = require("riot")
 
-import "./app.tag"
+import "./tags/app.tag"
 
 window.addEventListener("load", function() {
     riot.mount("*")
