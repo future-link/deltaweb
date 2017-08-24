@@ -18,7 +18,12 @@
   "homepage": "https://github.com/Petitsurume/deltaweb#readme",
   "dependencies": {
     "babel-eslint": "^7.2.3",
+    "dotenv": "^4.0.0",
     "eslint": "^4.2.0",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "pug": "^2.0.0-rc.3",
+    "riot": "^3.6.3",
+    "riot-tag-loader": "^1.0.0",
+    "webpack": "^3.5.5"
   }
 }
