@@ -1,11 +1,12 @@
 misskey-app
-    h1 misskey
+    misskey-header-bar
     #app
         misskey-loading
     script.
-        import "./login.tag"
+        import "./header-bar.tag"
+        import "./pages/login.tag"
         import "./loading.tag"
-        import "./home.tag"
+        import "./pages/home.tag"
         apiCall("../webapi/login-check").then(function(res) {
             if(res.login) {
                 riot.mount("#app", "misskey-home")

@@ -5,7 +5,6 @@ misskey-login
         input(type="password", name="password")
         button(type="button", onclick="{post}")
     script.
-        var apiCall = require("../api-call")
         this.post = function () {
             apiCall("../webapi/login", new FormData(this.refs.form)).then(function(){
                 location.reload()
