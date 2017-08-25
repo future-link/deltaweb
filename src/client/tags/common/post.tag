@@ -67,10 +67,10 @@ misskey-post(id="{post().id}")
             padding: 12px 0;
             margin: 0;
             margin-bottom: 1px;
-            padding-left: 74px;
         }
         > .main {
             padding: 16px 32px;
+            padding-left: 90px;
         }
         .header {
             border-bottom: 4px;
