@@ -27,4 +27,10 @@ app.post("/login-check", function(req, res) {
     })
 })
 
+app.post("/logout", function(req, res) {
+    req.session.destroy(function(){
+        res.send({status: "ok"})
+    })
+})
+
 module.exports = app
