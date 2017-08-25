@@ -10,7 +10,7 @@ app.use(require("express-session")({
 }))
 
 app.use((req, res, next) => {
-    req.session.csrf = rndstr()
+    if (req.session.csrf == null) req.session.csrf = rndstr()
     next()
 })
 
