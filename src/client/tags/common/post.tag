@@ -168,6 +168,7 @@ misskey-post(id="{post().id}")
             list-style: none;
             margin:0;
             margin-top: 8px;
+            padding:0;
         }
         .files ol li{
             margin: 0;
