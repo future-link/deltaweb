@@ -11,6 +11,7 @@ misskey-post-form
                 })
             }
             this.ctrlentercheck = function(e) {
+                if(self.refs.textarea.value === "") return
                 if((e.metaKey || e.ctrlKey) && e.keyCode == 13) {
                     this.send()
                 }
