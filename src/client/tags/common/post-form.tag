@@ -10,7 +10,6 @@ misskey-post-form
                 })
             }
             this.ctrlentercheck = function(e) {
-                console.log(e)
                 if((e.metaKey || e.ctrlKey) && e.keyCode == 13) {
                     this.send()
                 }
