@@ -4,7 +4,7 @@ misskey-my-panel
             i.fa.fa-user
             | Profile
     .section
-        a(href="#",onclick="{logout}")
+        a(href="javascript://",onclick="{logout}")
             i.fa.fa-sign-out
             | Logout
     script.

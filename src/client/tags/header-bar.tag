@@ -4,7 +4,7 @@ misskey-header-bar
             i.fa.fa-home
             |  Home
     .right
-        a(href="/_/profile",if="{user}")
+        a(href="javascript://",if="{user}")
             | @{user.screenName}
             img(src="{user.avatarThumbnailUrl}")
             misskey-my-panel(user="{user}")
