@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express.Router()
 const request = require("request-promise")
+require('express-ws')(app)
 
 app.post("/login", function(req, res) {
     request({
