@@ -12,3 +12,6 @@ a {
     color: #11491d;
     text-decoration: none;
 }
+* {
+    word-wrap: break-word;
+}
