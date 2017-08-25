@@ -17,7 +17,7 @@ misskey-post(id="{post().id}")
             .text: misskey-text-render(text="{post().text}")
             misskey-url-preview(text="{post().text}")
             .files
-                ol: li(each="{file in files}")
+                ol: li(each="{file in post().files}")
                     a(href="{file.url}")
                         img(src="{file.thumbnailUrl}")
 
