@@ -1,4 +1,6 @@
 module.exports = function(endpoint, params) {
+    var csrf = document.querySelector("meta[name=csrf-token]").content
+    if (params == null) params = {}
     if (params instanceof HTMLFormElement) {
         var use_formdata = false
         var n_params = {}
@@ -13,10 +15,13 @@ module.exports = function(endpoint, params) {
         }
     }
     var headers = {}
+    console.log(params)
     if (params instanceof FormData) {
         // なにもしない
+        params.append("csrf", csrf)
     } else {
         headers["Content-Type"] = "application/json"
+        params.csrf = csrf
         params = JSON.stringify(params)
     }
     return fetch("/_/api/"+endpoint, {
@@ -25,6 +30,12 @@ module.exports = function(endpoint, params) {
         headers: headers,
         credentials: 'include'
     }).then(function(res) {
-        return res.json()
+        return res.text()
+    }).then(function(res) {
+        if(res == "invalid-csrf-token") {
+            alert("セッションが切れたのでリロードします！！！")
+            location.reload()
+        }
+        return Promise.resolve(JSON.parse(res))
     })
 }
