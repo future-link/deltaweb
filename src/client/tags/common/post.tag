@@ -35,7 +35,7 @@ misskey-post(id="{post().id}")
             return this.opts.post.post || this.opts.post
         }
         this.reply = function() {
-            var text = prompt("リプライ", "@"+this.post().user.screenName+" ")
+            var text = prompt("@"+this.post().user.screenName+"の投稿「"+this.post().text+"」へのリプライ", "@"+this.post().user.screenName+" ")
             if (text == null) return
             apiCall("posts/reply", {
                 "text": text,
