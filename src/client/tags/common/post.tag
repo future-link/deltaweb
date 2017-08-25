@@ -18,7 +18,7 @@ misskey-post(id="{post().id}")
             misskey-url-preview(text="{post().text}")
             .files
                 ol: li(each="{file in post().files}")
-                    video.content(src="{file.url}",if="{file.mimeType.startsWith('video')}")
+                    video.content(src="{file.url}",if="{file.mimeType.startsWith('video')}",controls,preload="metadata")
                     a(href="{file.url}",if="{file.mimeType.startsWith('image')}")
                         img.content(src="{file.thumbnailUrl}",alt="{file.name}")
     .footer
