@@ -30,6 +30,6 @@ app.get("/", (req, res) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log("listen for 3000 port")
+app.listen(process.env.PORT || 3000, () => {
+    console.log("listen for "+(process.env.PORT || 3000)+" port")
 })
