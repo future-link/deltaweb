@@ -46,3 +46,9 @@ misskey-home
         misskey-timeline {
             max-width: 560px;
         }
+        @media screen and (max-width: 580px) {
+            .container {
+                max-width: 100vw;
+                max-width: calc(100vw - 20px);
+            }
+        }
