@@ -30,6 +30,7 @@ misskey-post(id="{post().id}")
         import "./subpost.tag"
         import "./text-render.tag"
         import "./url-preview.tag"
+        var self = this
         this.post = function() {
             return this.opts.post.post || this.opts.post
         }
@@ -47,14 +48,16 @@ misskey-post(id="{post().id}")
             apiCall("posts/repost", {
                 "post-id": this.post().id
             }).then(function(){
-                location.reload()
+                (self.opts.post.type == "repost" ? self.opts.post.post : self.opts.post).isReposted = true
+                self.update()
             })
         }
         this.like = function() {
             apiCall("posts/like", {
                 "post-id": this.post().id
             }).then(function(){
-                location.reload()
+                (self.opts.post.type == "repost" ? self.opts.post.post : self.opts.post).isLiked = true
+                self.update()
             })
         }
     style.
