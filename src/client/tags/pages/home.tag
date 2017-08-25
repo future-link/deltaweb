@@ -20,5 +20,5 @@ misskey-home
             box-sizing: border-box;
         }
         misskey-timeline {
-            width: 560px;
+            max-width: 560px;
         }
