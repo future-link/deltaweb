@@ -13,7 +13,7 @@ misskey-post(id="{post().id}")
             .author
                 a.name(href="/{post().user.screenName}") {post().user.name}
                 span.screen-name {post().user.screenName}
-        .text {post().text}
+        .text: misskey-text-render(text="{post().text}")
         .files
             ol: li(each="{file in files}")
                 a(href="{file.url}")
@@ -26,6 +26,7 @@ misskey-post(id="{post().id}")
             li: button(type="button", onclick="{like}", class="{active: this.post().isLiked}"): i.fa.fa-thumbs-o-up
     script.
         import "./subpost.tag"
+        import "./text-render.tag"
         this.post = function() {
             return this.opts.post.post || this.opts.post
         }
