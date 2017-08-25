@@ -18,9 +18,9 @@ misskey-post(id="{post().id}")
             misskey-url-preview(text="{post().text}")
             .files
                 ol: li(each="{file in post().files}")
-                    a(href="{file.url}")
-                        img(src="{file.thumbnailUrl}")
-
+                    video(src="{file.url}",if="{file.mimeType.startsWith('video')}")
+                    a(href="{file.url}",if="{file.mimeType.startsWith('image')}")
+                        img(src="{file.thumbnailUrl}",alt="{file.name}")
     .footer
         ul
             li: button(type="button", onclick="{reply}"): i.fa.fa-reply
