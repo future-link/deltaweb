@@ -18,6 +18,7 @@ module.exports = {
                 type: "none",
                 template: "pug"
             }},
+            { test: /\.css$/, loader: 'style-loader!css-loader' },
         ]
     }
 }
