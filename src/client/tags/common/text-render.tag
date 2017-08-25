@@ -36,7 +36,7 @@ misskey-text-render
             });
         }
         this.on("update", function() {
-            this.root.innerHTML = analyzeHashtags(analyzeMentions(analyzeUrl(analyzeStrike(analyzeBold(escapeHtml(this.opts.text)))))).replace(/\r?\n/g, '<br>')
+            this.root.innerHTML = analyzeHashtags(analyzeMentions(analyzeUrl(analyzeStrike(analyzeBold(escapeHtml(this.opts.text || "")))))).replace(/\r?\n/g, '<br>')
         })
         this.on("mount", function() {
             this.update()
