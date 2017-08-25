@@ -1,6 +1,6 @@
 misskey-post-form
     form(ref="form")
-        textarea(name="text")
+        textarea(name="text",onkeydown="{ctrlentercheck}")
         button(type="button") 何らか
         button(type="button",onclick="{send}").post-button 投稿
         script.
@@ -8,6 +8,12 @@ misskey-post-form
                 apiCall("posts/create", new FormData(this.refs.form)).then(function(){
                     location.reload()
                 })
+            }
+            this.ctrlentercheck = function(e) {
+                console.log(e)
+                if((e.metaKey || e.ctrlKey) && e.keyCode == 13) {
+                    this.send()
+                }
             }
         style.
             misskey-post-form {
