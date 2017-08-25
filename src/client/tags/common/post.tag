@@ -4,6 +4,7 @@ misskey-post(id="{post().id}")
         i.fa.fa-retweet
         | Reposted by 
         a.name(href="/{opts.post.user.screenName}") {opts.post.user.name}
+    misskey-subpost(if="{opts.post.type == 'reply'}",post="{opts.post.inReplyToPost}")
     .main
         .avatar-area
             a(href="/{post().user.screenName}")
@@ -19,8 +20,19 @@ misskey-post(id="{post().id}")
             li: button(type="button", onclick="{repost}", class="{active: this.post().isReposted}"): i.fa.fa-retweet
             li: button(type="button", onclick="{like}", class="{active: this.post().isLiked}"): i.fa.fa-thumbs-o-up
     script.
+        import "./subpost.tag"
         this.post = function() {
             return this.opts.post.post || this.opts.post
+        }
+        this.reply = function() {
+            var text = prompt("リプライ", "@"+this.post().user.screenName+" ")
+            if (text == null) return
+            apiCall("posts/reply", {
+                "text": text,
+                "in-reply-to-post-id": this.post().id
+            }).then(function(){
+                //location.reload()
+            })
         }
         this.repost = function() {
             apiCall("posts/repost", {
@@ -44,7 +56,7 @@ misskey-post(id="{post().id}")
             margin: 0;
             margin-bottom: 1px;
         }
-        .main {
+        > .main {
             padding: 16px 32px;
         }
         .header {
@@ -68,7 +80,7 @@ misskey-post(id="{post().id}")
             margin-left: 8px;
             color: #e2d1c1; 
         }
-        .text {
+        > .main > .text {
             color: #8c615a;
         }
         .footer {
@@ -127,4 +139,7 @@ misskey-post(id="{post().id}")
         }
         a.name{
             font-weight: bold;
+        }
+        .reply-post {
+            padding: 16px 32px 0;
         }
