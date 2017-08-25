@@ -18,9 +18,9 @@ misskey-post(id="{post().id}")
             misskey-url-preview(text="{post().text}")
             .files
                 ol: li(each="{file in post().files}")
-                    video(src="{file.url}",if="{file.mimeType.startsWith('video')}")
+                    video.content(src="{file.url}",if="{file.mimeType.startsWith('video')}")
                     a(href="{file.url}",if="{file.mimeType.startsWith('image')}")
-                        img(src="{file.thumbnailUrl}",alt="{file.name}")
+                        img.content(src="{file.thumbnailUrl}",alt="{file.name}")
     .footer
         ul
             li: button(type="button", onclick="{reply}"): i.fa.fa-reply
@@ -158,7 +158,7 @@ misskey-post(id="{post().id}")
         .reply-post {
             padding: 16px 32px 0;
         }
-        .files a *{
+        .files .content{
             max-width: 100%;
             max-height: 256px;
         }
@@ -166,4 +166,7 @@ misskey-post(id="{post().id}")
             list-style: none;
             margin:0;
             margin-top: 8px;
+        }
+        .files ol li{
+            margin: 0;
         }
