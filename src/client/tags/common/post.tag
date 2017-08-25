@@ -14,6 +14,11 @@ misskey-post(id="{post().id}")
                 a.name(href="/{post().user.screenName}") {post().user.name}
                 span.screen-name {post().user.screenName}
         .text {post().text}
+        .files
+            ol: li(each="{file in files}")
+                a(href="{file.url}")
+                    img(src="{file.thumbnailUrl}")
+
     .footer
         ul
             li: button(type="button", onclick="{reply}"): i.fa.fa-reply
@@ -142,4 +147,8 @@ misskey-post(id="{post().id}")
         }
         .reply-post {
             padding: 16px 32px 0;
+        }
+        .files a *{
+            max-width: 100%;
+            max-height: 256px;
         }
