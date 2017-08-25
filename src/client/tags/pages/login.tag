@@ -6,7 +6,7 @@ misskey-login
         button(type="button", onclick="{post}") ログイン
     script.
         this.post = function () {
-            apiCall("../webapi/login", new FormData(this.refs.form)).then(function(){
+            apiCall("../webapi/login", this.refs.form).then(function(){
                 location.reload()
             })
         }.bind(this)

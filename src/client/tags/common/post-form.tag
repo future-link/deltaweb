@@ -5,7 +5,7 @@ misskey-post-form
         button(type="button",onclick="{send}").post-button 投稿
         script.
             this.send = function() {
-                apiCall("posts/create", new FormData(this.refs.form)).then(function(){
+                apiCall("posts/create", this.refs.form).then(function(){
                     location.reload()
                 })
             }
