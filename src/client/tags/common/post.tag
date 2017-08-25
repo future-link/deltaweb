@@ -13,11 +13,13 @@ misskey-post(id="{post().id}")
             .author
                 a.name(href="/{post().user.screenName}") {post().user.name}
                 span.screen-name {post().user.screenName}
-        .text: misskey-text-render(text="{post().text}")
-        .files
-            ol: li(each="{file in files}")
-                a(href="{file.url}")
-                    img(src="{file.thumbnailUrl}")
+        .content
+            .text: misskey-text-render(text="{post().text}")
+            misskey-url-preview(text="{post().text}")
+            .files
+                ol: li(each="{file in files}")
+                    a(href="{file.url}")
+                        img(src="{file.thumbnailUrl}")
 
     .footer
         ul
@@ -27,6 +29,7 @@ misskey-post(id="{post().id}")
     script.
         import "./subpost.tag"
         import "./text-render.tag"
+        import "./url-preview.tag"
         this.post = function() {
             return this.opts.post.post || this.opts.post
         }
@@ -61,6 +64,7 @@ misskey-post(id="{post().id}")
             padding: 12px 0;
             margin: 0;
             margin-bottom: 1px;
+            padding-left: 74px;
         }
         > .main {
             padding: 16px 32px;
@@ -69,8 +73,11 @@ misskey-post(id="{post().id}")
             border-bottom: 4px;
         }
         .avatar-area {
-            float:left;
-            margin-right:16px;
+            float: left;
+            margin-left: -74px;
+        }
+        .avatar-area a{
+            display: block;
         }
         .avatar-area img{
             width:58px;
@@ -86,7 +93,7 @@ misskey-post(id="{post().id}")
             margin-left: 8px;
             color: #e2d1c1; 
         }
-        > .main > .text {
+        > .main > .content > .text {
             color: #8c615a;
         }
         .footer {
