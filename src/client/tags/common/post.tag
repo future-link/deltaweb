@@ -106,10 +106,6 @@ misskey-post(id="{post().id}")
             margin: 0;
             padding: 0 16px;
             min-width: 2.5em;
-            opacity: 0.5;
-        }
-        misskey-post:hover .footer li{
-            opacity: 1;
         }
         .footer button {
             background: transparent;
@@ -117,9 +113,14 @@ misskey-post(id="{post().id}")
             margin: 0;
             color: #d8c5ad;
             font-size:1em;
+            opacity: 0.5;
+        }
+        misskey-post:hover .footer button{
+            opacity: 1;
         }
         .footer button.active {
             color: #11491d;
+            opacity:1;
         }
         .repost-info{
             margin: 0;
