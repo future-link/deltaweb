@@ -3,14 +3,18 @@ misskey-home
         h2 ホーム
         misskey-post-form
         misskey-timeline(posts="{posts}")
+        misskey-loading(if="{!loaded}")
     script.
         import "../common/post-form.tag"
         import "../common/timeline.tag"
+        import "../loading.tag"
         var self = this
         this.posts = []
+        this.loaded = false
         apiCall("posts/timeline").then(function(res){
             console.log(res)
             self.posts = res
+            self.loaded = true
             self.update()
         })
         function connectWS() {
