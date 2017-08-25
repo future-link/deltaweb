@@ -1,3 +1,14 @@
 body{
     background: #f2ebe8;
 }
+button {
+    background: #11491d;
+    color: white;
+    border:0;
+    padding: 10px 18px;
+    font-size:0.8em;
+}
+a {
+    color: #11491d;
+    text-decoration: none;
+}
