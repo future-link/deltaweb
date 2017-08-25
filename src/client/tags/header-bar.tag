@@ -12,8 +12,11 @@ misskey-header-bar
             left:0;
             width: 100vw;
             display: block;
+            height:3em;
+            line-height:3em;
         }
         a {
-            padding: 1em;
+            padding: 0 1em;
             display:inline-block;
+            height: 3em;
         }
