@@ -1,4 +1,5 @@
 misskey-text-render
+    span(ref="render")
     script.
         function escapeHtml(text) {
             return text.replace(/>/g,'&gt;').replace(/</g,'&lt;');
@@ -36,7 +37,7 @@ misskey-text-render
             });
         }
         this.on("update", function() {
-            this.root.innerHTML = analyzeHashtags(analyzeMentions(analyzeUrl(analyzeStrike(analyzeBold(escapeHtml(this.opts.text || "")))))).replace(/\r?\n/g, '<br>')
+            this.refs.render.innerHTML = analyzeHashtags(analyzeMentions(analyzeUrl(analyzeStrike(analyzeBold(escapeHtml(this.opts.text || "")))))).replace(/\r?\n/g, '<br>')
         })
         this.on("mount", function() {
             this.update()
@@ -50,4 +51,7 @@ misskey-text-render
             font-size: 0.9em;
             font-weight: normal;
             font-style: normal;
+        }
+        span {
+            word-wrap: break-word;
         }

@@ -98,7 +98,6 @@ misskey-post(id="{post().id}")
         }
         > .main > .content > .text {
             color: #8c615a;
-            word-wrap: break-word;
         }
         .footer {
             position:relative;
