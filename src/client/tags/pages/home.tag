@@ -16,7 +16,11 @@ misskey-home
         function connectWS() {
             var ws = new WebSocket(location.origin.replace("http", "ws")+"/_/api/ws/home?csrf="+(document.querySelector("meta[name=csrf-token]").content))
             ws.addEventListener("message", function(mes){
-                mes = JSON.parse(mes.data)
+                try{
+                    mes = JSON.parse(mes.data)
+                } catch (e) {
+                    console.log(mes.data)
+                }
                 console.log(mes)
                 switch(mes.type) {
                     case "post":
