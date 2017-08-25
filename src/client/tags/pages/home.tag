@@ -13,6 +13,7 @@ misskey-home
             self.posts = res
             self.update()
         })
+        new WebSocket(location.origin.replace("http", "ws")+"/_/api/ws/home?csrf="+(document.querySelector("meta[name=csrf-token]").content))
     style.
         .container {
             flex: 1 1 560px;

@@ -2,6 +2,7 @@ require("dotenv").config()
 const express = require("express")
 const app = express()
 const rndstr = require("rndstr")
+require("express-ws")(app)
 
 app.use(require("express-session")({
     secret: process.env.SESSION_SECRET,
@@ -19,8 +20,9 @@ app.use(require("body-parser").json())
 
 app.use(require("./utils/csrf-check"))
 app.use("/_/resources", express.static(__dirname+"/../dist"))
-app.use("/_/api", require("./utils/api-proxy"))
+app.use("/_/api", require("./api-proxy"))
 app.use("/_/webapi", require("./webapi"))
+app.use("/_/api/ws", require("./websocket-proxy"))
 app.set("views", __dirname+"/views")
 app.set("view engine", "pug")
 
