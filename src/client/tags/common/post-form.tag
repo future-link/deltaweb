@@ -1,12 +1,13 @@
 misskey-post-form
     form(ref="form")
-        textarea(name="text",onkeydown="{ctrlentercheck}")
+        textarea(name="text",onkeydown="{ctrlentercheck}",ref="textarea")
         button(type="button") 何らか
         button(type="button",onclick="{send}").post-button 投稿
         script.
+            var self = this
             this.send = function() {
                 apiCall("posts/create", this.refs.form).then(function(){
-                    location.reload()
+                    self.refs.textarea.value = ""
                 })
             }
             this.ctrlentercheck = function(e) {

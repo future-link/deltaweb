@@ -13,7 +13,17 @@ misskey-home
             self.posts = res
             self.update()
         })
-        new WebSocket(location.origin.replace("http", "ws")+"/_/api/ws/home?csrf="+(document.querySelector("meta[name=csrf-token]").content))
+        var ws = new WebSocket(location.origin.replace("http", "ws")+"/_/api/ws/home?csrf="+(document.querySelector("meta[name=csrf-token]").content))
+        ws.addEventListener("message", function(mes){
+            mes = JSON.parse(mes.data)
+            console.log(mes)
+            switch(mes.type) {
+                case "post":
+                    self.posts.unshift(mes.value)
+                    self.update()
+                    break;
+            }
+        })
     style.
         .container {
             flex: 1 1 560px;
