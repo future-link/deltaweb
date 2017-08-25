@@ -3,3 +3,15 @@ misskey-timeline
         misskey-post(post="{post}")
     script.
         import "./post.tag"
+    style.
+        misskey-timeline{
+            display:block;
+        }
+        misskey-post:first-child {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        misskey-post:last-child {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }

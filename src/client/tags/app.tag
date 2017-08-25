@@ -14,3 +14,8 @@ misskey-app
                 riot.mount("#app", "misskey-login")
             }
         })
+    style.
+        #app {
+            display:flex;
+            justify-content: center;
+        }

@@ -1,7 +1,8 @@
 misskey-home
-    h2 ホーム
-    misskey-post-form
-    misskey-timeline(posts="{posts}")
+    .container
+        h2 ホーム
+        misskey-post-form
+        misskey-timeline(posts="{posts}")
     script.
         import "../common/post-form.tag"
         import "../common/timeline.tag"
@@ -12,3 +13,12 @@ misskey-home
             self.posts = res
             self.update()
         })
+    style.
+        .container {
+            flex: 1 1 560px;
+            max-width:560px;
+            box-sizing: border-box;
+        }
+        misskey-timeline {
+            width: 560px;
+        }
