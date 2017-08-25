@@ -162,3 +162,8 @@ misskey-post(id="{post().id}")
             max-width: 100%;
             max-height: 256px;
         }
+        .files ol {
+            list-style: none;
+            margin:0;
+            margin-top: 8px;
+        }
