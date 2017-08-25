@@ -11,10 +11,12 @@ endpoints.forEach(function(endpoint) {
     router.ws("/"+endpoint,function(ws, req) {
         if (req.session.user_id == null) {
             console.log("not login")
+            ws.send("error:not-login")
             return ws.close()
         }
         if (req.session.csrf != req.query.csrf) {
             console.log("invalid csrf")
+            ws.send("error:invalid-csrf")
             return ws.close()
         }
         var upstream = new websocket.client()
