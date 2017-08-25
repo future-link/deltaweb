@@ -31,7 +31,7 @@ misskey-post(id="{post().id}")
                 "text": text,
                 "in-reply-to-post-id": this.post().id
             }).then(function(){
-                location.reload()
+                // いい話
             })
         }
         this.repost = function() {
