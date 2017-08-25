@@ -31,7 +31,7 @@ misskey-post(id="{post().id}")
                 "text": text,
                 "in-reply-to-post-id": this.post().id
             }).then(function(){
-                //location.reload()
+                location.reload()
             })
         }
         this.repost = function() {
@@ -87,7 +87,6 @@ misskey-post(id="{post().id}")
             position:relative;
             display: block;
             z-index: 1;
-            margin-left: 112px;
             margin-top: -12px;
         }
         .footer:after {
