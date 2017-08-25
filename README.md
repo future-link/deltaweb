@@ -16,5 +16,5 @@ cp .env.example .env
 ```
 npm install
 npm run build
-node src/index.js
+npm start
 ```
