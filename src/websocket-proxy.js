@@ -21,17 +21,19 @@ endpoints.forEach(function(endpoint) {
         upstream.on("connectFailed", function() {
             ws.close()
         })
-        upstream.on("connect", function() {
+        upstream.on("connect", function(upstream) {
+            console.log("upstream connected")
             ws.on("close", function() {
                 upstream.close()
             })
-        })
-        upstream.on("close", function() {
-            ws.close()
-        })
-        upstream.on("message", function(data) {
-            console.log(data)
-            ws.send(data)
+            upstream.on("message", function(data) {
+                console.log(data)
+                if (data.type != "utf8") return
+                ws.send(data.utf8Data)
+            })
+            upstream.on("close", function() {
+                ws.close()
+            })
         })
         var queryobject = req.query
         queryobject["passkey"] = process.env.API_KEY
