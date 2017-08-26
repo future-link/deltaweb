@@ -1,8 +1,8 @@
 misskey-post-page
     .container(if="{loaded && !notfound}")
-        a(href="/{post.user.screenName}/{post.nextPost}",if="{post.nextPost}") つぎの
+        a.next(href="/{post.user.screenName}/{post.nextPost}",if="{post.nextPost}") つぎの
         misskey-post(if="{post}",post="{post}")
-        a(href="/{post.user.screenName}/{post.prevPost}",if="{post.prevPost}") まえの
+        a.prev(href="/{post.user.screenName}/{post.prevPost}",if="{post.prevPost}") まえの
     misskey-notfound(if="{notfound}")
     misskey-loading(if="{!loaded && !notfound}")
     script.
@@ -35,4 +35,19 @@ misskey-post-page
         }
         misskey-post{
             text-align: left;
+        }
+        @media screen and (min-width: 700px) {
+            > .container {
+                position:relative;
+                > a {
+                    position: absolute;
+                    top: 1em;
+                }
+                .prev{
+                    left: -4em;
+                }
+                .next{
+                    right: -4em;
+                }
+            }
         }
