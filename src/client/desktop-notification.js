@@ -3,6 +3,7 @@ function connectWS() {
     var reconnect = true
     var ws = require("./streaming-call")("home")
     ws.addEventListener("message", function(mes){
+        if (mes.data == "error:not-login") reconnect = false
         try{
             mes = JSON.parse(mes.data)
         } catch (e) {

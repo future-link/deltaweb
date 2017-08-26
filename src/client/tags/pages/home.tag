@@ -21,6 +21,7 @@ misskey-home
             var reconnect = true
             var ws = require("../../streaming-call.js")("home")
             ws.addEventListener("message", function(mes){
+                if (mes.data == "error:not-login") reconnect = false
                 try{
                     mes = JSON.parse(mes.data)
                 } catch (e) {
@@ -39,7 +40,7 @@ misskey-home
                 if (!reconnect) return
                 setTimeout(function(){
                     connectWS()
-                }, 250)
+                }, 500)
             })
             self.on("unmount", function() { // 省エネ
                 reconnect = false
