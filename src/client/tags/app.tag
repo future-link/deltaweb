@@ -19,11 +19,13 @@ misskey-app
             {path: "/:user/:post_id", tag: "post-page"},
             {path: "*", tag: "notfound"}
         ]
-        apiCall("../webapi/login-check").then(function(res) {
+        apiCall("account/show").then(function(res) {
+            console.log(res)
+            var isLogin = res.error == null
             pages.forEach(function(page) {
                 route(page.path, function(info){
                     console.log(page.path, arguments)
-                    if (page.login && !res.login) {
+                    if (page.login && !isLogin) {
                         riot.mount("#app", "misskey-login")
                         return
                     }

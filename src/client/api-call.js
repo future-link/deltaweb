@@ -37,5 +37,10 @@ module.exports = function(endpoint, params) {
             location.reload()
         }
         return Promise.resolve(JSON.parse(res))
+    }).then(function(res) {
+        if (endpoint == "account/show") {
+            window.USER = res
+        }
+        return Promise.resolve(res)
     })
 }

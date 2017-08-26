@@ -12,7 +12,7 @@ misskey-header-bar
         import "./my-panel.tag"
         var self = this
         document.body.style.marginTop = "3em"
-        apiCall("../api/account/show", {}).then(function(res) {
+        apiCall("account/show", {}).then(function(res) {
             if(res.error) return
             self.user = res
             self.update()

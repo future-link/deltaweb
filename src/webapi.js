@@ -20,13 +20,6 @@ app.post("/login", function(req, res) {
     })
 })
 
-app.post("/login-check", function(req, res) {
-    console.log(req.session)
-    res.send({
-        login: req.session.user_id != null
-    })
-})
-
 app.post("/logout", function(req, res) {
     req.session.destroy(function() {
         res.send({status: "ok"})
