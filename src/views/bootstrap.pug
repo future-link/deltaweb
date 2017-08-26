@@ -6,7 +6,8 @@ html
         meta(name="referrer",content="no-referrer")
         meta(name="viewport",content="width=device-width")
         meta(name="csrf-token",content=csrf)
-        script(src="/_/resources/bundle.js")
-        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+        script(src="/_/resources/bundle.js",async)
     body
         misskey-app
+            h1 Loading...
+            p Please wait!
