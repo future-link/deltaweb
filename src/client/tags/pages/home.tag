@@ -18,6 +18,7 @@ misskey-home
             self.update()
         })
         function connectWS() {
+            var reconnect = true
             var ws = new WebSocket(location.origin.replace("http", "ws")+"/_/api/ws/home?csrf="+(document.querySelector("meta[name=csrf-token]").content))
             ws.addEventListener("message", function(mes){
                 try{
@@ -35,9 +36,14 @@ misskey-home
             })
             ws.addEventListener("close", function(){
                 console.log("websocket disconnected")
+                if (!reconnect) return
                 setTimeout(function(){
                     connectWS()
                 }, 250)
+            })
+            self.on("unmount", function() { // 省エネ
+                reconnect = false
+                ws.close()
             })
         }
         connectWS()
