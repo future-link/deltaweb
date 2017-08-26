@@ -4,7 +4,6 @@ misskey-relative-time(title="{human_readable_time()}")
         var moment = require("moment")
         var self = this
         this.human_readable_time = function() {
-            console.log(moment(this.opts.date).format("YYYY/MM/DD HH:mm:ss"))
             return moment(this.opts.date).format("YYYY/MM/DD HH:mm:ss")
         }
         function calc(){
@@ -12,7 +11,6 @@ misskey-relative-time(title="{human_readable_time()}")
             var mt = new Date()-d
             var old_time = self.time
             var time = Math.floor(mt/1000)
-            console.log(time)
             var unit = "s" // second
             if(time > 60) {
                 time = Math.floor(time/60)
