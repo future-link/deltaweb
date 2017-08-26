@@ -13,6 +13,9 @@ misskey-post(id="{post().id}")
             .author
                 a.name(href="/{post().user.screenName}") {post().user.name}
                 span.screen-name {post().user.screenName}
+            .right
+                a(href="/{post().user.screenName}/{post().id}")
+                    misskey-relative-time(date="{new Date(post().createdAt)}")
         .content
             .text: misskey-text-render(text="{post().text}")
             misskey-url-preview(text="{post().text}")
@@ -30,6 +33,7 @@ misskey-post(id="{post().id}")
         import "./subpost.tag"
         import "./text-render.tag"
         import "./url-preview.tag"
+        import "./relative-time.tag"
         var self = this
         this.post = function() {
             return this.opts.post.post || this.opts.post
@@ -102,6 +106,7 @@ misskey-post(id="{post().id}")
             > .header {
                 border-bottom: 4px;
                 > .author {
+                    display: inline-block;
                     > a {
                         color: #736060;
                         text-decoration: none;
@@ -109,6 +114,12 @@ misskey-post(id="{post().id}")
                     > .screen-name {
                         margin-left: 8px;
                         color: #e2d1c1; 
+                    }
+                }
+                > .right {
+                    float: right;
+                    > a{
+                        color: #B7A793;
                     }
                 }
             }

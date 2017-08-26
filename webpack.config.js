@@ -10,7 +10,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             riot: "riot",
             apiCall: __dirname+"/src/client/api-call.js"
-        })
+        }),
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ],
     module: {
         loaders: [
