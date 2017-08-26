@@ -38,6 +38,7 @@ misskey-post-form
             apiCall("../api/album/files/upload", this.refs.darkform).then(function(res){
                 if(res.error) {
                     alert(res.error)
+                    return
                 }
                 self.files.push(res)
                 self.update()
