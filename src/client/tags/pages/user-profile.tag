@@ -5,7 +5,20 @@ misskey-user-profile
                 img(src="{this.user.avatarUrl}")
                 h2 {user.name}
                 span @{user.screenName}
-        misskey-timeline(posts="{posts}")
+        .user-info
+            ul
+                li(class="{active:opts.type == 'timeline'}"): a(href="/{this.user.screenName}")
+                    p 投稿
+                    span {user.postsCount}
+                li(class="{active:opts.type == 'following'}"): a(href="/{this.user.screenName}/following")
+                    p フォロー
+                    span {user.followingCount}
+                li(class="{active:opts.type == 'followers'}"): a(href="/{this.user.screenName}/followers")
+                    p フォロワー
+                    span {user.followersCount}
+        misskey-user-profile-timeline(user="{user}",if="{loaded && opts.type == 'timeline'}")
+        misskey-user-profile-following(user="{user}",if="{loaded && opts.type == 'following'}")
+        misskey-user-profile-followers(user="{user}",if="{loaded && opts.type == 'followers'}")
     misskey-notfound(if="{notfound}")
     script.
         import "./notfound.tag"
@@ -22,12 +35,6 @@ misskey-user-profile
                 self.user = res
                 self.loaded = true
                 self.update()
-                apiCall("posts/user-timeline", {
-                    "user-id": self.user.id
-                }).then(function(res){
-                    self.posts = res
-                    self.update()
-                })
             })
         })
     style.
@@ -37,7 +44,7 @@ misskey-user-profile
                 background-repeat: no-repeat;
                 background-position: center 50%;
                 background-size: cover;
-                border-radius: 8px;
+                border-radius: 8px 8px 0 0;
                 text-align: center;
                 color: white;
                 text-shadow: 0 0 6px rgba(0,0,0,0.9);
@@ -56,3 +63,71 @@ misskey-user-profile
         misskey-timeline {
             max-width: 560px;
         }
+        .user-info{
+            background: white;
+            ul {
+                display: flex;
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                li {
+                    display: inline-block;
+                    margin: 0;
+                    padding: 0;
+                    flex: 1;
+                    &.active {
+                        color: #11491d;
+                        border-bottom: solid 3px #11491d;
+                    }
+                    a{
+                        display: inline-block;
+                        text-align: center;
+                        width: 100%;
+                        padding: 0.5em 0;
+                    }
+                    p {
+                        margin: 0;
+                        padding: 0;
+                        font-size: 0.7em;
+                    }
+                }
+            }
+        }
+misskey-user-profile-timeline
+    misskey-timeline(posts="{posts}")
+    script.
+        var self = this
+        this.on("mount", function() {
+            apiCall("posts/user-timeline", {
+                "user-id": self.opts.user.id
+            }).then(function(res){
+                self.posts = res
+                self.update()
+            })
+        })
+misskey-user-profile-following
+    misskey-users(users="{users}")
+    script.
+        import "../common/users.tag"
+        var self = this
+        this.on("mount", function() {
+            apiCall("users/following", {
+                "user-id": self.opts.user.id
+            }).then(function(res){
+                self.users = res
+                self.update()
+            })
+        })
+misskey-user-profile-followers
+    misskey-users(users="{users}")
+    script.
+        import "../common/users.tag"
+        var self = this
+        this.on("mount", function() {
+            apiCall("users/followers", {
+                "user-id": self.opts.user.id
+            }).then(function(res){
+                self.users = res
+                self.update()
+            })
+        })

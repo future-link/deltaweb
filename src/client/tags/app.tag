@@ -13,7 +13,9 @@ misskey-app
         var route = require("page")
         var pages = [
             {path: "/", tag: "home", login: true},
-            {path: "/:user", tag: "user-profile"},
+            {path: "/:user", tag: "user-profile", params:{type: "timeline"}},
+            {path: "/:user/following", tag: "user-profile", params:{type: "following"}},
+            {path: "/:user/followers", tag: "user-profile", params:{type: "followers"}},
             {path: "/:user/:post_id", tag: "post-page"},
             {path: "*", tag: "notfound"}
         ]
@@ -25,7 +27,7 @@ misskey-app
                         riot.mount("#app", "misskey-login")
                         return
                     }
-                    riot.mount("#app", "misskey-"+page.tag, info.params)
+                    riot.mount("#app", "misskey-"+page.tag, Object.assign(page.params || {}, info.params))
                 })
             })
             route.stop()
