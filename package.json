@@ -26,6 +26,7 @@
     "express": "^4.15.3",
     "express-session": "^1.15.5",
     "express-ws": "^3.0.0",
+    "less": "^2.7.2",
     "page": "^1.7.1",
     "pug": "^2.0.0-rc.3",
     "request": "^2.81.0",

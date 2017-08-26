@@ -16,7 +16,8 @@ module.exports = {
         loaders: [
             { test: /\.tag$/, exclude: /node_modules/, loader: 'riot-tag-loader', query: {
                 type: "none",
-                template: "pug"
+                template: "pug",
+                style: "less"
             }},
             { test: /\.css$/, loader: 'style-loader!css-loader' },
         ]

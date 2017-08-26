@@ -68,36 +68,53 @@ misskey-post(id="{post().id}")
             margin: 0;
             margin-bottom: 1px;
         }
+        .repost-info{
+            margin: 0;
+            padding: 8px 32px;
+            line-height: 28px;
+            color: #57bb00;
+            > img{
+                float:left;
+                height:28px;
+                width:28px;
+                margin-right: 8px;
+            }
+            > i{
+                margin-right: 4px;
+            }
+        }
         > .main {
             padding: 16px 32px;
             padding-left: 90px;
-        }
-        .header {
-            border-bottom: 4px;
-        }
-        .avatar-area {
-            float: left;
-            margin-left: -74px;
-        }
-        .avatar-area a{
-            display: block;
-        }
-        .avatar-area img{
-            width:58px;
-            height:58px;
-            border-radius: 8px;
-            vertical-align: bottom;
-        }
-        .author a{
-            color: #736060;
-            text-decoration: none;
-        }
-        .author .screen-name {
-            margin-left: 8px;
-            color: #e2d1c1; 
-        }
-        > .main > .content > .text {
-            color: #8c615a;
+            > .avatar-area {
+                float: left;
+                margin-left: -74px;
+                > a{
+                    display: block;
+                    > img{
+                        width:58px;
+                        height:58px;
+                        border-radius: 8px;
+                        vertical-align: bottom;
+                    }
+                }
+            }
+            > .header {
+                border-bottom: 4px;
+                > .author {
+                    > a {
+                        color: #736060;
+                        text-decoration: none;
+                    }
+                    > .screen-name {
+                        margin-left: 8px;
+                        color: #e2d1c1; 
+                    }
+                }
+            }
+            > .content > .text {
+                color: #8c615a;
+            }
         }
         .footer {
             position:relative;
@@ -105,54 +122,39 @@ misskey-post(id="{post().id}")
             z-index: 1;
             margin-top: -12px;
             margin-left: -74px;
-        }
-        .footer:after {
-            content: "";
-            display: block;
-            clear: both;
-        }
-        .footer ul{
-            display: block;
-            float:right;
-            list-style:none;
-            margin:0;
-            padding:0;
-        }
-        .footer li{
-            display: inline-block;
-            margin: 0;
-            padding: 0 16px;
-            min-width: 2.5em;
-        }
-        .footer button {
-            background: transparent;
-            padding: 8px;
-            margin: 0;
-            color: #d8c5ad;
-            font-size:1em;
-            opacity: 0.5;
+            &:after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+            > ul {
+                display: block;
+                float:right;
+                list-style:none;
+                margin:0;
+                padding:0;
+                > li{
+                    display: inline-block;
+                    margin: 0;
+                    padding: 0 16px;
+                    min-width: 2.5em;
+                    > button {
+                        background: transparent;
+                        padding: 8px;
+                        margin: 0;
+                        color: #d8c5ad;
+                        font-size:1em;
+                        opacity: 0.5;
+                        &.active {
+                            color: #11491d;
+                            opacity:1;
+                        }
+                    }
+                }
+            }
         }
         misskey-post:hover .footer button{
             opacity: 1;
-        }
-        .footer button.active {
-            color: #11491d;
-            opacity:1;
-        }
-        .repost-info{
-            margin: 0;
-            padding: 8px 32px;
-            line-height: 28px;
-            color: #57bb00;
-        }
-        .repost-info img{
-            float:left;
-            height:28px;
-            width:28px;
-            margin-right: 8px;
-        }
-        .repost-info i{
-            margin-right: 4px;
         }
         a.name{
             font-weight: bold;
@@ -160,16 +162,18 @@ misskey-post(id="{post().id}")
         .reply-post {
             padding: 16px 32px 0;
         }
-        .files .content{
-            max-width: 100%;
-            max-height: 256px;
-        }
-        .files ol {
-            list-style: none;
-            margin:0;
-            margin-top: 8px;
-            padding:0;
-        }
-        .files ol li{
-            margin: 0;
+        .files {
+            > ol {
+                list-style: none;
+                margin:0;
+                margin-top: 8px;
+                padding:0;
+                > li{
+                    margin: 0;
+                    > .content{
+                        max-width: 100%;
+                        max-height: 256px;
+                    }
+                }
+            }
         }
