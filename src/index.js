@@ -2,6 +2,7 @@ require("dotenv").config()
 const express = require("express")
 const app = express()
 const rndstr = require("rndstr")
+const multer = require("multer")()
 require("express-ws")(app)
 
 app.use(require("express-session")({
@@ -18,10 +19,9 @@ app.use((req, res, next) => {
 app.use(require("body-parser").urlencoded())
 app.use(require("body-parser").json())
 
-app.use(require("./utils/csrf-check"))
 app.use("/_/resources", express.static(__dirname+"/../dist"))
-app.use("/_/api", require("./api-proxy"))
-app.use("/_/webapi", require("./webapi"))
+app.use("/_/api", multer.single("file"), require("./utils/csrf-check"), require("./api-proxy"))
+app.use("/_/webapi", require("./utils/csrf-check"), require("./webapi"))
 app.use("/_/api/ws", require("./websocket-proxy"))
 app.set("views", __dirname+"/views")
 app.set("view engine", "pug")

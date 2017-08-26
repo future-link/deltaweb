@@ -1,50 +1,109 @@
 misskey-post-form
     form(ref="form")
+        input(type="hidden", name="files", ref="files_input")
         textarea(name="text",onkeydown="{ctrlentercheck}",ref="textarea")
+        .files
+            .file(each="{file in files}")
+                a(href="{file.url}",target="_blank")
+                    img(src="{file.thumbnailUrl}")
+                .name {file.name}
+                .description {file.mimeType}
+                button(type="button", onclick="{removefileclick}")
+                    i.fa.fa-close
         .actions
-            button(type="button") 何らか
+            button(type="button",onclick="{fileattachclick}")
+                i.fa.fa-upload
             .right
                 span {errorMessage}
                 button(type="button",onclick="{send}").post-button 投稿
-        script.
-            var self = this
-            var errorVer = 0
-            this.send = function() {
-                apiCall("posts/create", this.refs.form).then(function(res){
-                    if(res.error) {
-                        self.errorMessage = res.error
-                        var nowErrorVer = ++errorVer
-                        setTimeout(function(){
-                            if(nowErrorVer != errorVer) return
-                            self.errorMessage = ""
-                            self.update()
-                        }, 5 * 1000)
+    form(ref="darkform").darkside
+        input(type="file",name="file",ref="fileselector",onchange="{fileinputchange}")
+    script.
+        var self = this
+        this.files = []
+        var errorVer = 0
+        this.removefileclick = function(e) {
+            var select_file = this.file
+            self.files = this.files.filter(function(file){
+                console.log(select_file, file)
+                return select_file.id != file.id
+            })
+            self.update()
+        }
+        this.fileattachclick = function() {
+            this.refs.fileselector.click()
+        }
+        this.fileinputchange = function() {
+            console.log(this.refs.fileselector.value)
+            apiCall("../api/album/files/upload", this.refs.darkform).then(function(res){
+                if(res.error) {
+                    alert(res.error)
+                }
+                self.files.push(res)
+                self.update()
+            })
+            this.refs.fileselector.value = ""
+        }
+        this.send = function() {
+            this.refs.files_input.value = this.files.map(function(file){return file.id}).join(",")
+            console.log(this.refs.files_input.value)
+            apiCall("posts/create", this.refs.form).then(function(res){
+                if(res.error) {
+                    self.errorMessage = res.error
+                    var nowErrorVer = ++errorVer
+                    setTimeout(function(){
+                        if(nowErrorVer != errorVer) return
+                        self.errorMessage = ""
                         self.update()
-                        return
-                    }
-                    self.refs.textarea.value = ""
-                })
-            }
-            this.ctrlentercheck = function(e) {
-                if(self.refs.textarea.value === "") return
-                if((e.metaKey || e.ctrlKey) && e.keyCode == 13) {
-                    this.send()
+                    }, 5 * 1000)
+                    self.update()
+                    return
                 }
+                self.refs.textarea.value = ""
+                self.files = []
+                self.update()
+            })
+        }
+        this.ctrlentercheck = function(e) {
+            if(self.refs.textarea.value === "") return
+            if((e.metaKey || e.ctrlKey) && e.keyCode == 13) {
+                this.send()
             }
-        style.
-            misskey-post-form {
-                display:block;
+        }
+    style.
+        misskey-post-form {
+            display:block;
+        }
+        textarea {
+            width: 100%;
+            resize: vertical;
+            min-height:5em;
+        }
+        .actions {
+            position:relative;
+            .right {
+                position:absolute;
+                right: 0;
+                top:0;
             }
-            textarea {
-                width: 100%;
-                resize: vertical;
-                min-height:5em;
+        }
+        .darkside{
+            display: none;
+        }
+        .file {
+            margin: 0.5em 0;
+            position:relative;
+            img {
+                width: 3em;
+                height: 3em;
+                float:left;
+                padding-right: 0.5em;
             }
-            .actions {
-                position:relative;
-                .right {
-                    position:absolute;
-                    right: 0;
-                    top:0;
-                }
+            button {
+                position:absolute;
+                right:0;
+                top:0;
+                bottom:0;
             }
+            line-height: 1.5em;
+        }
