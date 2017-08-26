@@ -41,9 +41,9 @@ misskey-i-settings-default
 misskey-i-settings-profile
     h1 プロフィール
     label 名前
-    input(type="text", ref="name", value="{window.USER.name}")
+    input(type="text", ref="name", value="{window.USER.name}", placeholder="Shibuya Rin")
     label コメント
-    input(type="text", ref="comment", value="{window.USER.comment}")
+    input(type="text", ref="comment", value="{window.USER.comment}", placeholder="ふーん、あんたが私のプロデューサー？まあ、悪くないかな。私は渋谷凛。今日からよろしくね。")
     label タグ
     input(type="text", ref="tags", value="{window.USER.tags.join(' ')}", placeholder="このように スペースで 区切る")
     label URL
