@@ -1,10 +1,11 @@
 misskey-post-form
     form(ref="form")
         textarea(name="text",onkeydown="{ctrlentercheck}",ref="textarea")
-        button(type="button") 何らか
-        .right
-            span {errorMessage}
-            button(type="button",onclick="{send}").post-button 投稿
+        .actions
+            button(type="button") 何らか
+            .right
+                span {errorMessage}
+                button(type="button",onclick="{send}").post-button 投稿
         script.
             var self = this
             var errorVer = 0
@@ -39,6 +40,11 @@ misskey-post-form
                 resize: vertical;
                 min-height:5em;
             }
-            .right {
-                float:right;
+            .actions {
+                position:relative;
+                .right {
+                    position:absolute;
+                    right: 0;
+                    top:0;
+                }
             }
