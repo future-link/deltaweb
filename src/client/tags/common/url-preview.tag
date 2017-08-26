@@ -24,11 +24,14 @@ misskey-url-preview-url
         var self = this
         this.on("mount", function() {
             fetch("https://analizzatore.prezzemolo.ga/?url="+this.opts.url).then(function(res){
+                if (!res.ok) throw new Error('server respond with the status code greater than 400.')
                 return res.json()
             }).then(function(res){
                 self.info = res
                 self.loaded = true
                 self.update()
+            }).catch(function(err){
+                console.error(err)
             })
         })
     style.
