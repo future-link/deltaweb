@@ -6,6 +6,7 @@ misskey-timeline
     style.
         misskey-timeline{
             display:block;
+            margin: 8px 0;
         }
         misskey-post:first-child {
             border-top-left-radius: 8px;
