@@ -2,11 +2,25 @@ misskey-post-form
     form(ref="form")
         textarea(name="text",onkeydown="{ctrlentercheck}",ref="textarea")
         button(type="button") 何らか
-        button(type="button",onclick="{send}").post-button 投稿
+        .right
+            span {errorMessage}
+            button(type="button",onclick="{send}").post-button 投稿
         script.
             var self = this
+            var errorVer = 0
             this.send = function() {
-                apiCall("posts/create", this.refs.form).then(function(){
+                apiCall("posts/create", this.refs.form).then(function(res){
+                    if(res.error) {
+                        self.errorMessage = res.error
+                        var nowErrorVer = ++errorVer
+                        setTimeout(function(){
+                            if(nowErrorVer != errorVer) return
+                            self.errorMessage = ""
+                            self.update()
+                        }, 5 * 1000)
+                        self.update()
+                        return
+                    }
                     self.refs.textarea.value = ""
                 })
             }
@@ -25,6 +39,6 @@ misskey-post-form
                 resize: vertical;
                 min-height:5em;
             }
-            button.post-button {
+            .right {
                 float:right;
             }
