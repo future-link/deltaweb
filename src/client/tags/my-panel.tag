@@ -4,6 +4,9 @@ misskey-my-panel
             i.fa.fa-user
             | Profile
     .section
+        a(href="https://github.com/Petitsurume/deltaweb/issues/new",target="_blank")
+            i.fa.fa-comment-o
+            | Feedback
         a(href="javascript://",onclick="{logout}")
             i.fa.fa-sign-out
             | Logout
