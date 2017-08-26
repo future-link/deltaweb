@@ -16,7 +16,7 @@ misskey-url-preview
             display:block;
         }
 misskey-url-preview-url
-    a(href="{opts.url}",if="{loaded}")
+    a(href="{opts.url}",if="{loaded}",target="_blank")
         h1(if="{info.title}") {info.title}
         .description {info.description}
     script.
