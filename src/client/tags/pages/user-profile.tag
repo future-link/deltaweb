@@ -4,7 +4,24 @@ misskey-user-profile
             .profile-main
                 img(src="{this.user.avatarUrl}")
                 h2 {user.name}
-                span @{user.screenName}
+                span.follow-badge(if="{user.isFollowed}")
+                    i.fa.fa-check
+                    |  フォローされています
+                p @{user.screenName}
+                p(if="{user.comment.length}")
+                    i.fa.fa-comment
+                    |  {user.comment}
+                p
+                    span(href="javascript://",each="{tag in user.tags}")
+                        i.fa.fa-tag
+                        |  {tag} 
+                p(if="{user.url.length}")
+                    i.fa.fa-link
+                    |  
+                    a(href="{user.url}", target="_blank") {user.url}
+                p(if="{user.location.length}")
+                    i.fa.fa-map-marker
+                    |  {user.location}
         .user-info
             ul
                 li(class="{active:opts.type == 'timeline'}"): a(href="/{this.user.screenName}")
@@ -16,6 +33,10 @@ misskey-user-profile
                 li(class="{active:opts.type == 'followers'}"): a(href="/{this.user.screenName}/followers")
                     p フォロワー
                     span {user.followersCount}
+                li.noflex(if="{USER.id != user.id && !user.isFollowing}")
+                    button(onclick="{follow}") フォロー
+                li.noflex(if="{USER.id != user.id && user.isFollowing}")
+                    button(onclick="{unfollow}") フォロー解除
         misskey-user-profile-timeline(user="{user}",if="{loaded && opts.type == 'timeline'}")
         misskey-user-profile-following(user="{user}",if="{loaded && opts.type == 'following'}")
         misskey-user-profile-followers(user="{user}",if="{loaded && opts.type == 'followers'}")
@@ -24,6 +45,20 @@ misskey-user-profile
         import "./notfound.tag"
         var self = this
         this.loaded = false
+        this.follow = function() {
+            apiCall("users/follow", {"user-id": this.user.id}).then(function(res) {
+                if(res.error) return alert(res.error)
+                self.user.isFollowing = true
+                self.update()
+            })
+        }
+        this.unfollow = function() {
+            apiCall("users/unfollow", {"user-id": this.user.id}).then(function(res) {
+                if(res.error) return alert(res.error)
+                self.user.isFollowing = false
+                self.update()
+            })
+        }
         this.on("mount", function() {
             apiCall("users/show", {
                 "screen-name": this.opts.user
@@ -49,14 +84,25 @@ misskey-user-profile
                 color: white;
                 text-shadow: 0 0 6px rgba(0,0,0,0.9);
                 .profile-main {
-                    padding: 2em;
+                    padding: 2em 2em 1em;
                     background: rgba(0, 0, 0, 0.4);
                     border-radius: 8px;
+                }
+                a {
+                    color: white;
+                    text-decoration: underline;
                 }
                 img {
                     height: 96px;
                     width: 96px;
                     border-radius: 96px;
+                }
+                .follow-badge {
+                    background: rgba(0, 0, 0, 0.6);
+                    border-radius: 4px;
+                    margin-top:-1em;
+                    padding: 0.5em;
+                    font-size: 0.8em;
                 }
             }
         }
@@ -74,7 +120,13 @@ misskey-user-profile
                     display: inline-block;
                     margin: 0;
                     padding: 0;
-                    flex: 1;
+                    &:not(.noflex) {
+                        flex: 1;
+                    }
+                    > button {
+                        width: 100%;
+                        height: 100%;
+                    }
                     &.active {
                         color: #11491d;
                         border-bottom: solid 3px #11491d;
