@@ -8,6 +8,7 @@ misskey-app
         import "./loading.tag"
         import "./pages/home.tag"
         import "./pages/user-profile.tag"
+        import "./pages/post-page.tag"
         import "./pages/notfound.tag"
         var route = require("page")
         var pages = [

@@ -47,18 +47,3 @@ misskey-home
             })
         }
         connectWS()
-    style.
-        .container {
-            flex: 1 1 560px;
-            max-width:560px;
-            box-sizing: border-box;
-        }
-        misskey-timeline {
-            max-width: 560px;
-        }
-        @media screen and (max-width: 580px) {
-            .container {
-                max-width: 100vw;
-                max-width: calc(100vw - 20px);
-            }
-        }

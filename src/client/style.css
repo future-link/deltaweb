@@ -16,3 +16,14 @@ a {
 * {
     word-wrap: break-word;
 }
+.container {
+    flex: 1 1 560px;
+    max-width:560px;
+    box-sizing: border-box;
+}
+@media screen and (max-width: 580px) {
+    .container {
+        max-width: 100vw;
+        max-width: calc(100vw - 20px);
+    }
+}
