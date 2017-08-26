@@ -27,3 +27,14 @@ a {
         max-width: calc(100vw - 20px);
     }
 }
+
+input,textarea {
+    display: block;
+    padding: 0.5em;
+    margin: 16px 0;
+    border: solid 2px #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 16px;
+}
