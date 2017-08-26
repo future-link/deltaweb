@@ -9,7 +9,6 @@ misskey-url-preview
             while (result = regex.exec(this.opts.text)) {
                 urls.push(result[0])
             }
-            console.log(urls)
             return urls
         }
     style.

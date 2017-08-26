@@ -26,7 +26,7 @@ app.use("/_/api/ws", require("./websocket-proxy"))
 app.set("views", __dirname+"/views")
 app.set("view engine", "pug")
 
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
     res.render("bootstrap",{
         csrf: req.session.csrf
     })
