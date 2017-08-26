@@ -10,12 +10,16 @@ misskey-app
         import "./pages/user-profile.tag"
         import "./pages/post-page.tag"
         import "./pages/notfound.tag"
+        import "./pages/i/settings.tag"
         var route = require("page")
         var pages = [
             {path: "/", tag: "home", login: true},
             {path: "/:user", tag: "user-profile", params:{type: "timeline"}},
             {path: "/:user/following", tag: "user-profile", params:{type: "following"}},
             {path: "/:user/followers", tag: "user-profile", params:{type: "followers"}},
+            {path: "/i/settings", tag: "i-settings", params: {tab: "default"}, login: true},
+            {path: "/i/settings/:tab", tag: "i-settings", login: true},
+            // むっちゃ引っかかる系
             {path: "/:user/:post_id", tag: "post-page"},
             {path: "*", tag: "notfound"}
         ]
@@ -34,6 +38,7 @@ misskey-app
             })
             route.stop()
             route.start()
+            require("../desktop-notification")()
         })
     style.
         #app {

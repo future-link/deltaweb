@@ -4,6 +4,9 @@ misskey-my-panel
             i.fa.fa-user
             | Profile
     .section
+        a(href="/i/settings")
+            i.fa.fa-cog
+            | Settings
         a(href="https://github.com/Petitsurume/deltaweb/issues/new",target="_blank")
             i.fa.fa-comment-o
             | Feedback
@@ -19,11 +22,12 @@ misskey-my-panel
         }
     style.
         misskey-my-panel {
-            background: #fff;
+            background: rgba(255,255,255,0.5);
             width: 10em;
         }
         .section {
-            margin: 0.5em 0;
+            margin: 0.5em 0 0;
+            background: white;
         }
         i.fa {
             width: 1.5em;

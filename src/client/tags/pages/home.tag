@@ -19,7 +19,7 @@ misskey-home
         })
         function connectWS() {
             var reconnect = true
-            var ws = new WebSocket(location.origin.replace("http", "ws")+"/_/api/ws/home?csrf="+(document.querySelector("meta[name=csrf-token]").content))
+            var ws = require("../../streaming-call.js")("home")
             ws.addEventListener("message", function(mes){
                 try{
                     mes = JSON.parse(mes.data)

@@ -6,8 +6,8 @@ button {
     background: #11491d;
     color: white;
     border:0;
-    padding: 10px 18px;
-    font-size:0.8em;
+    padding: 8px 16px;
+    font-size:1em;
 }
 a {
     color: #11491d;
@@ -17,6 +17,7 @@ a {
     word-wrap: break-word;
 }
 .container {
+    margin-top: 8px;
     flex: 1 1 560px;
     max-width:560px;
     box-sizing: border-box;
@@ -33,7 +34,7 @@ a {
     }
 }
 
-input,textarea {
+input[type="text"],input[type="password"],textarea {
     display: block;
     padding: 0.5em;
     margin: 16px 0;
