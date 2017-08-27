@@ -7,10 +7,13 @@ misskey-i-settings
             a(href="/i/settings/notification",class="{active:isActive('notification')}",show="{Notification}")
                 i.fa.fa-bell
                 span 通知
+            a(href="/i/settings/web",class="{active:isActive('web')}")
+                i.fa.fa-desktop
+                span Web
         .content
             misskey-i-settings-default(if="{isActive('default')}")
             misskey-i-settings-profile(if="{isActive('profile')}")
-            misskey-i-settings-notification(if="{isActive('notification')}")
+            misskey-i-settings-web(if="{isActive('web')}")
     script.
         this.isActive = function (name) {
             return name === this.opts.tab
@@ -111,4 +114,21 @@ misskey-i-settings-notification-checkbox
             > span {
                 line-height: 2em;
             }
+        }
+misskey-i-settings-web
+    h2 カスタムCSS(上級者向け)
+    textarea(ref="custom_css") {localStorage.getItem("web.customcss")}
+    button(onclick="{save_custom_css}")
+        i.fa.fa-save
+        |  保存
+    p Tips: CSSの設定を間違ってUIが崩壊した場合は、ブラウザのJavaScriptコンソールで<code>localStorage.removeItem("web.customcss")</code>を実行することでカスタムCSSをクリアできます
+    style.
+        textarea {
+            resize: vertical;
+            min-height: 5em;
+        }
+    script.
+        this.save_custom_css = function() {
+            localStorage.setItem("web.customcss", this.refs.custom_css.value)
+            alert("保存しました!\n反映するにはリロードしてください。")
         }
