@@ -155,7 +155,6 @@ misskey-user-profile-timeline
                 "max-cursor": self.posts[self.posts.length-1].cursor
             }).then(function(res){
                 self.posts = self.posts.concat(res)
-                self.update()
                 return
             })
         }

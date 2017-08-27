@@ -23,7 +23,6 @@ misskey-home
             return apiCall("posts/timeline",{"max-cursor": last_post.cursor}).then(function(res){
                 if(res.error) return alert(res.error)
                 self.posts = self.posts.concat(res)
-                self.update()
                 return
             })
         }

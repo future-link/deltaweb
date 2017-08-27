@@ -5,16 +5,19 @@ misskey-timeline
     script.
         import "./post.tag"
         var self = this
-        this.locks = {
+        self.locks = {
             readmore: false
         }
         this.readmore = function () {
             // Read Moreボタンをロックする
             self.locks.readmore = true
             var result = self.opts.readmore()
-            // Promiseっぽくなければ結果が返ってきた時点でロックを解除
-            if (!('then' in result) && !('catch' in result))
-                return self.locks.readmore = false
+            // Promiseっぽくない
+            if (!('then' in result) && !('catch' in result)) {
+                self.locks.readmore = false
+                self.update()
+                return
+            }
             result.then(function(res){
                 console.log(res)
                 // finallyがないので一番下のthenをそれっぽく呼ぶ
@@ -24,8 +27,9 @@ misskey-timeline
                 // 同上
                 return
             }).then(function(){
-                // なんかしらでPromiseが終わったらロックを解除する
+                // なんかしらでPromiseが終わった
                 self.locks.readmore = false
+                self.update()
             })
         }
     style.
