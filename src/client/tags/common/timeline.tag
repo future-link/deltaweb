@@ -14,8 +14,8 @@ misskey-timeline
             // Promiseっぽくなければ結果が返ってきた時点でロックを解除
             if (!('then' in result) && !('catch' in result))
                 return this.locks.readmore = false
-            result.then(function(result){
-                console.log(result)
+            result.then(function(res){
+                console.log(res)
                 // finallyがないので一番下のthenをそれっぽく呼ぶ
                 return
             }).catch(function(error){
