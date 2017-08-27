@@ -11,7 +11,7 @@ misskey-timeline
             // Read Moreボタンをロックする
             this.locks.readmore = true
             var result = this.opts.readmore()
-            // Promiseでなければ結果が返ってきた時点でロックを解除
+            // Promiseっぽくなければ結果が返ってきた時点でロックを解除
             if (!('then' in result) && !('catch' in result))
                 return this.locks.readmore = false
             result.then(function(result){
