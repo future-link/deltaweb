@@ -1,20 +1,18 @@
 misskey-timeline
     virtual(each="{post in opts.posts}")
         misskey-post(post="{post}")
-    button.read-more(if="{opts.readmore && opts.posts && opts.posts.length}",onclick="{readmore}",disabled="{locks.readmore}") Read More
+    button.read-more(if="{opts.readmore && opts.posts && opts.posts.length}",onclick="{readmore}",disabled="{isDisabledReadmore}") Read More
     script.
         import "./post.tag"
         var self = this
-        self.locks = {
-            readmore: false
-        }
+        this.isDisabledReadmore = false
         this.readmore = function () {
             // Read Moreボタンをロックする
-            self.locks.readmore = true
+            self.isDisabledReadmore = true
             var result = self.opts.readmore()
             // Promiseっぽくない
             if (!('then' in result) && !('catch' in result)) {
-                self.locks.readmore = false
+                self.isDisabledReadmore = false
                 self.update()
                 return
             }
@@ -23,12 +21,13 @@ misskey-timeline
                 // finallyがないので一番下のthenをそれっぽく呼ぶ
                 return
             }).catch(function(error){
+                alert('Read Moreでエラー起きた')
                 console.error(error)
                 // 同上
                 return
             }).then(function(){
                 // なんかしらでPromiseが終わった
-                self.locks.readmore = false
+                self.isDisabledReadmore = false
                 self.update()
             })
         }
