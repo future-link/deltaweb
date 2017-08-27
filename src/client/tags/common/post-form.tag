@@ -1,7 +1,7 @@
 misskey-post-form
     form(ref="form")
         input(type="hidden", name="files", ref="files_input")
-        textarea(name="text",onkeydown="{ctrlentercheck}",ref="textarea")
+        textarea(name="text",onkeydown="{ctrlentercheck}",onpaste="{paste}",ref="textarea")
         .files
             .file(each="{file in files}")
                 a(href="{file.url}",target="_blank")
@@ -33,9 +33,8 @@ misskey-post-form
         this.fileattachclick = function() {
             this.refs.fileselector.click()
         }
-        this.fileinputchange = function() {
-            console.log(this.refs.fileselector.value)
-            apiCall("../api/album/files/upload", this.refs.darkform).then(function(res){
+        function upload(form) {
+            return apiCall("../api/album/files/upload", form).then(function(res){
                 if(res.error) {
                     alert(res.error)
                     return
@@ -43,7 +42,27 @@ misskey-post-form
                 self.files.push(res)
                 self.update()
             })
+        }
+        this.fileinputchange = function() {
+            console.log(this.refs.fileselector.value)
+            upload(this.refs.darkform)
             this.refs.fileselector.value = ""
+        }
+        this.paste = function(e) {
+            var clipboardData = e.clipboardData || e.originalEvent.clipboardData || window.clipboardData;
+            if(!clipboardData && !clipboardData.items && !clipboardData.items.length) return;
+            console.log(clipboardData);
+            var item;
+            Array.prototype.forEach.call(clipboardData.items,function(item_){
+                if(item_.kind != "file") return;
+                item = item_;
+            })
+            if(!item) return;
+            e.preventDefault();
+            var file = item.getAsFile();
+            var form = new FormData();
+            form.append("file", file)
+            upload(form);
         }
         this.send = function() {
             this.refs.files_input.value = this.files.map(function(file){return file.id}).join(",")
