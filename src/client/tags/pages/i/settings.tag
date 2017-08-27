@@ -69,6 +69,7 @@ misskey-i-settings-profile
             })
         }
 misskey-i-settings-notification
+    span(if="{!Notification}") このブラウザはデスクトップ通知に対応していません :(
     button(if="{Notification.permission == 'default'}",onclick="{request_permission}")
         | 通知を許可する
     span(if="{Notification.permission == 'denied'}") 通知要求が拒否されました :(
