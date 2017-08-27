@@ -20,10 +20,10 @@ misskey-home
         this.readmore = function() {
             var last_post = self.posts[self.posts.length-1]
             console.log(last_post)
-            apiCall("posts/timeline",{"max-cursor": last_post.cursor}).then(function(res){
+            return apiCall("posts/timeline",{"max-cursor": last_post.cursor}).then(function(res){
                 if(res.error) return alert(res.error)
                 self.posts = self.posts.concat(res)
-                self.update()
+                return
             })
         }
         function connectWS() {
