@@ -13,6 +13,7 @@ misskey-i-settings
         .content
             misskey-i-settings-default(if="{isActive('default')}")
             misskey-i-settings-profile(if="{isActive('profile')}")
+            misskey-i-settings-notification(if="{isActive('notification')}")
             misskey-i-settings-web(if="{isActive('web')}")
     script.
         this.isActive = function (name) {
