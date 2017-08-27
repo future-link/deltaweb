@@ -27,6 +27,7 @@ misskey-header-bar
             display: block;
             height:3em;
             line-height:3em;
+            z-index:5000; /* 兆円ほしい！ */
         }
         > div > a {
             padding: 0 1em;
