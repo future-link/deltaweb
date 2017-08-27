@@ -2,7 +2,7 @@ misskey-home
     .container
         h2 ホーム
         misskey-post-form
-        misskey-timeline(posts="{posts}")
+        misskey-timeline(posts="{posts}",readmore="{readmore}")
         misskey-loading(if="{!loaded}")
     script.
         import "../common/post-form.tag"
@@ -17,6 +17,15 @@ misskey-home
             self.loaded = true
             self.update()
         })
+        this.readmore = function() {
+            var last_post = self.posts[self.posts.length-1]
+            console.log(last_post)
+            apiCall("posts/timeline",{"max-cursor": last_post.cursor}).then(function(res){
+                if(res.error) return alert(res.error)
+                self.posts = self.posts.concat(res)
+                self.update()
+            })
+        }
         function connectWS() {
             var reconnect = true
             var ws = require("../../streaming-call.js")("home")

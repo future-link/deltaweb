@@ -146,9 +146,18 @@ misskey-user-profile
             }
         }
 misskey-user-profile-timeline
-    misskey-timeline(posts="{posts}")
+    misskey-timeline(posts="{posts}",readmore="{readmore}")
     script.
         var self = this
+        this.readmore = function() {
+            apiCall("posts/user-timeline", {
+                "user-id": self.opts.user.id,
+                "max-cursor": self.posts[self.posts.length-1].cursor
+            }).then(function(res){
+                self.posts = self.posts.concat(res)
+                self.update()
+            })
+        }
         this.on("mount", function() {
             apiCall("posts/user-timeline", {
                 "user-id": self.opts.user.id
