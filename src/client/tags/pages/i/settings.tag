@@ -4,7 +4,7 @@ misskey-i-settings
             a(href="/i/settings/profile",class="{active:isActive('profile')}")
                 i.fa.fa-user
                 span プロフィール
-            a(href="/i/settings/notification",class="{active:isActive('notification')}")
+            a(href="/i/settings/notification",class="{active:isActive('notification')}",show="{Notification}")
                 i.fa.fa-bell
                 span 通知
         .content
