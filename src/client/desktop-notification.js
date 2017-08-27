@@ -12,12 +12,15 @@ function connectWS() {
         console.log(mes)
         if(mes.type != "notification") return
         if(localStorage.getItem("notification."+mes.value.type) == null) return
+        if(!mes.value.content.user && mes.value.content.post && mes.value.content.post.user) {
+            mes.value.content.user = mes.value.content.post.user
+        }
         var notify = new Notification(mes.value.type+" from @"+mes.value.content.user.screenName,{
             body: mes.value.content.post ? mes.value.content.post.text : undefined
         })
         notify.onclick = function() {
             if (mes.value.content.post) {
-                window.open("/"+USER.screenName+"/"+mes.value.content.post.id, "_blank")
+                window.open("/"+(mes.value.type == "mention" ? mes.value.content.user.screenName : USER.screenName)+"/"+mes.value.content.post.id, "_blank")
             } else {
                 window.open("/"+mes.value.content.user.screenName, "_blank")
             }
