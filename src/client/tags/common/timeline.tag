@@ -1,7 +1,7 @@
 misskey-timeline
     virtual(each="{post in opts.posts}")
         misskey-post(post="{post}")
-    button.read-more(if="{opts.readmore && post && post.length}",onclick="{opts.readmore}") Read More
+    button.read-more(if="{opts.readmore && opts.posts && opts.posts.length}",onclick="{opts.readmore}") Read More
     script.
         import "./post.tag"
     style.
