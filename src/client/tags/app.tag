@@ -2,10 +2,12 @@ misskey-app
     misskey-header-bar
     #app
         misskey-loading
+    misskey-footer
     script.
         import "./header-bar.tag"
-        import "./pages/login.tag"
         import "./loading.tag"
+        import "./footer.tag"
+        import "./pages/login.tag"
         import "./pages/home.tag"
         import "./pages/user-profile.tag"
         import "./pages/post-page.tag"
