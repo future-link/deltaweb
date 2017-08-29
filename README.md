@@ -1,7 +1,9 @@
 # deltaweb
+[![Build Status](https://travis-ci.org/Petitsurume/deltaweb.svg?branch=master)](https://travis-ci.org/Petitsurume/deltaweb)
+
 misskey-delta/misskey-webの別実装
 
-## config
+## How to config
 ```
 cp .env.example .env
 ```
@@ -11,7 +13,7 @@ cp .env.example .env
 - `API_KEY`: apiPasskey
 - `PORT`: 動くポート
 
-## run
+## How to run
 
 ```
 npm install
