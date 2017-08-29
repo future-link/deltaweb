@@ -1,4 +1,5 @@
-# deltaweb [![Build Status](https://travis-ci.org/Petitsurume/deltaweb.svg?branch=master)](https://travis-ci.org/Petitsurume/deltaweb)
+# deltaweb
+[![Build Status](https://travis-ci.org/Petitsurume/deltaweb.svg?branch=master)](https://travis-ci.org/Petitsurume/deltaweb)
 misskey-delta/misskey-webの別実装
 
 ## How to config
