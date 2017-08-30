@@ -9,40 +9,60 @@ html
         script(src="/_/resources/bundle.js",async)
     body
         misskey-app
+            div
+            
             style.
+                html, body{
+                    margin: 0;
+                    padding: 0;
+                    width: 100vw;
+                    height: 100vh;
+                }
+                
                 misskey-app{
-                  width: 30px;
-                  height: 30px;
-                  margin: 90px 0;
-                  position: relative;
+                    display:flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100vw;
+                    height: 100vh;
+                    margin: 0;
+                    padding: 0;
+                    background: #F4EEEB;
+                }
+                
+                misskey-app div{
+                    width: 30px;
+                    height: 30px;
+                    margin: 90px 0;
+                    position: relative;
                 }
 
-                misskey-app:before{
-                  position: absolute;
-                  left: 0;
-                  top: 0;
-                  right: 0;
-                  bottom: 0;
-                  background: rgba(192,192,192,0.5);
-                  content: "";
-                  border-radius: 50%;
-                  animation: anim1 2s infinite;
+                misskey-app div:before{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(192,192,192,0.5);
+                    content: "";
+                    border-radius: 50%;
+                    animation: anim1 2s infinite;
                 }
 
-                misskey-app:after{
-                  position: absolute;
-                  left: 0;
-                  top: 0;
-                  right: 0;
-                  bottom: 0;
-                  background: rgba(192,192,192,0.5);
-                  content: "";
-                  border-radius: 50%;
-                  animation: anim1 2s -1s infinite;
+                misskey-app div:after{
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(192,192,192,0.5);
+                    content: "";
+                    border-radius: 50%;
+                    animation: anim1 2s -1s infinite;
                 }
 
                 @keyframes anim1{
                     0%{transform: scale(0)}
-                   50%{transform: scale(2.5)}
-                  100%{transform: scale(0)}
+                    50%{transform: scale(2.5)}
+                    100%{transform: scale(0)}
                 }

@@ -46,4 +46,5 @@ misskey-app
         #app {
             display:flex;
             justify-content: center;
+            margin-top: 3em;
         }

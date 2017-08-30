@@ -11,7 +11,7 @@ misskey-header-bar
     script.
         import "./my-panel.tag"
         var self = this
-        document.body.style.marginTop = "3em"
+        // document.body.style.marginTop = "3em"
         apiCall("account/show", {}).then(function(res) {
             if(res.error) return
             self.user = res
