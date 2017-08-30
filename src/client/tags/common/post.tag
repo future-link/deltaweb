@@ -150,15 +150,19 @@ misskey-post(id="{post().id}")
                     padding: 0 16px;
                     min-width: 2.5em;
                     > button {
+                        cursor: pointer;
                         background: transparent;
                         padding: 8px;
                         margin: 0;
                         color: #d8c5ad;
-                        font-size:1em;
+                        font-size: 1em;
                         opacity: 0.5;
-                        &.active {
+                        transition: all 0.1s ease-out;
+                        
+                        &.active,
+                        &:hover {
                             color: #11491d;
-                            opacity:1;
+                            opacity: 1;
                         }
                     }
                 }
