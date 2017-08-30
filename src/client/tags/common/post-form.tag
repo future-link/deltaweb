@@ -1,7 +1,7 @@
 misskey-post-form
     form(ref="form")
         input(type="hidden", name="files", ref="files_input")
-        textarea(name="text",onkeydown="{ctrlentercheck}",onpaste="{paste}",ref="textarea")
+        textarea(name="text",onkeydown="{ctrlentercheck}",onpaste="{paste}",ref="textarea",ondrop="{drop}",ondragstart="{dragstart}",ondragover="{dragover}")
         .files
             .file(each="{file in files}")
                 a(href="{file.url}",target="_blank")
@@ -69,6 +69,25 @@ misskey-post-form
             if(!item) return;
             e.preventDefault();
             var file = item.getAsFile();
+            var form = new FormData();
+            form.append("file", file)
+            upload(form);
+        }
+        this.dragstart = function(e){
+            e.dataTransfer.effectAllowed = "copy"
+            e.preventDefault()
+        }
+        this.dragover = function(e){
+            e = e
+            if(!e.files) return
+            e.preventDefault()
+        }
+        this.drop = function(e) { // ガウリールドロップアウト
+            console.log(e)
+            e.preventDefault();
+            if(!e.dataTransfer.files) return;
+            e.preventDefault();
+            var file = e.dataTransfer.files[0];
             var form = new FormData();
             form.append("file", file)
             upload(form);
