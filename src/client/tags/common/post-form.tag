@@ -35,6 +35,10 @@ misskey-post-form
             this.refs.fileselector.click()
         }
         function upload(form) {
+            if(self.files.length >= 4) {
+                alert("ファイル多すぎ")
+                return
+            }
             self.uploading = true
             self.update()
             return apiCall("../api/album/files/upload", form).then(function(res){
@@ -44,6 +48,14 @@ misskey-post-form
                     self.update()
                     return
                 }
+                var duplicate_flag = false
+                self.files.forEach(function(file){
+                    if(res.id == file.id) {
+                        alert("同じファイルを上げるな")
+                        duplicate_flag = true
+                    }
+                })
+                if(duplicate_flag) return
                 self.files.push(res)
                 self.update()
             }).catch(function(e){
