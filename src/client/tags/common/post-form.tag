@@ -12,7 +12,8 @@ misskey-post-form
                     i.fa.fa-close
         .actions
             button(type="button",onclick="{fileattachclick}")
-                i.fa.fa-upload
+                i.fa.fa-upload(if="{!uploading}")
+                i.fa.fa-spinner.fa-pulse(if="{uploading}")
             .right
                 span {errorMessage}
                 button(type="button",onclick="{send}").post-button 投稿
@@ -34,12 +35,20 @@ misskey-post-form
             this.refs.fileselector.click()
         }
         function upload(form) {
+            self.uploading = true
+            self.update()
             return apiCall("../api/album/files/upload", form).then(function(res){
+                self.uploading = false
                 if(res.error) {
                     alert(res.error)
+                    self.update()
                     return
                 }
                 self.files.push(res)
+                self.update()
+            }).catch(function(e){
+                console.error(e)
+                self.uploading = false
                 self.update()
             })
         }
