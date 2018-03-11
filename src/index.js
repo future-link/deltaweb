@@ -26,6 +26,11 @@ app.use("/_/api/ws", require("./websocket-proxy"))
 app.set("views", __dirname+"/views")
 app.set("view engine", "pug")
 
+app.ws("/*", (ws, req) => {
+    ws.send("error:path-not-found:"+req.path)
+    ws.close()
+})
+
 app.get("*", (req, res) => {
     res.render("bootstrap",{
         csrf: req.session.csrf
