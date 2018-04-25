@@ -4,7 +4,7 @@ const app = express()
 const rndstr = require("rndstr")
 const multer = require("multer")()
 const session = require("express-session")
-const RedisStore = require("connect-resdis")(session)
+const RedisStore = require("connect-redis")(session)
 require("express-ws")(app)
 
 const sessionOpt = {
