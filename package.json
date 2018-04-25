@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Petitsurume/deltaweb.git"
+    "url": "git+https://github.com/AnemoneStar/deltaweb.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Petitsurume/deltaweb/issues"
+    "url": "https://github.com/AnemoneStar/deltaweb/issues"
   },
-  "homepage": "https://github.com/Petitsurume/deltaweb#readme",
+  "homepage": "https://github.com/AnemoneStar/deltaweb#readme",
   "dependencies": {
     "babel-eslint": "^7.2.3",
     "body-parser": "^1.17.2",
