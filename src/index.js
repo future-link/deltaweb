@@ -3,13 +3,17 @@ const express = require("express")
 const app = express()
 const rndstr = require("rndstr")
 const multer = require("multer")()
+const session = require("express-session")
+const RedisStore = require("connect-resdis")(session)
 require("express-ws")(app)
 
-app.use(require("express-session")({
+const sessionOpt = {
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
-}))
+}
+if (process.env.REDIS_URL) sessionOpt.store = new RedisStore({url: process.env.REDIS_URL})
+app.use(session(sessionOpt))
 
 app.use((req, res, next) => {
     if (req.session.csrf == null) req.session.csrf = rndstr()
