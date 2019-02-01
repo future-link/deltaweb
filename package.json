@@ -39,6 +39,6 @@
     "rndstr": "^1.0.0",
     "style-loader": "^0.18.2",
     "webpack": "^3.5.5",
-    "websocket": "^1.0.24"
+    "ws": "^6.1.3"
   }
 }
