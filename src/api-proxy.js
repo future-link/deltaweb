@@ -2,7 +2,6 @@ const request = require("request-promise")
 module.exports = function(req, res, next) {
     if (req.method != "POST") return next()
     if (req.path != "/album/files/upload" && req.file) return res.status(400).send({error: "this-api-is-not-support-file-upload"})
-    console.log(req.path, req.file)
     var options = {
         method: "POST",
         uri: process.env.API_ROOT+req.path,
@@ -29,7 +28,6 @@ module.exports = function(req, res, next) {
     request(options).then(api_res => {
         res.send(api_res)
     }).catch(err => {
-        console.error(err)
         res.status(err.response.statusCode || 503).send(err.error || {"error": "api-connect-error"})
     })
 }
