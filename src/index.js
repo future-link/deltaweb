@@ -10,7 +10,10 @@ require("express-ws")(app)
 const sessionOpt = {
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 365 * 24 * 60 * 60 * 1000,
+    }
 }
 if (process.env.REDIS_URL) sessionOpt.store = new RedisStore({url: process.env.REDIS_URL})
 app.use(session(sessionOpt))
