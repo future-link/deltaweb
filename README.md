@@ -1,5 +1,5 @@
 # deltaweb
-[![Build Status](https://travis-ci.org/AnemoneStar/deltaweb.svg?branch=master)](https://travis-ci.org/AnemoneStar/deltaweb)
+[![Build Status](https://travis-ci.org/future-link/deltaweb.svg?branch=master)](https://travis-ci.org/future-link/deltaweb)
 
 misskey-delta/misskey-webの別実装
 
