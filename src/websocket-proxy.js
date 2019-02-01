@@ -10,12 +10,10 @@ const endpoints = [
 endpoints.forEach(function(endpoint) {
     router.ws("/"+endpoint,function(ws, req) {
         if (req.session.user_id == null) {
-            console.log("not login")
             ws.send("error:not-login")
             return ws.close()
         }
         if (req.session.csrf != req.query.csrf) {
-            console.log("invalid csrf")
             ws.send("error:invalid-csrf")
             return ws.close()
         }
@@ -24,9 +22,7 @@ endpoints.forEach(function(endpoint) {
         queryobject["user-id"] = req.session.user_id
         delete queryobject["csrf"]
         var query = Object.entries(queryobject).map(([name, value]) => `${name}=${encodeURIComponent(value)}`).join("&")
-        console.log(query)
         const url = process.env.API_ROOT.replace("http", "ws")+"/streams/"+endpoint+"?"+query
-        console.log(url)
         var upstream = new WebSocket(url)
         upstream.on("error", () => {
             ws.close()

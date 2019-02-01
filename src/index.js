@@ -42,5 +42,6 @@ app.get("*", (req, res) => {
 })
 
 app.listen(process.env.PORT || 3000, () => {
+    // eslint-disable-next-line no-console
     console.log("listen for "+(process.env.PORT || 3000)+" port")
 })
