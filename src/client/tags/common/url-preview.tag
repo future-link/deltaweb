@@ -53,7 +53,7 @@ misskey-url-preview-url
                 this.update()
                 return
             }
-            fetch("https://analizzatore.prezzemolo.ga/?url="+this.opts.url).then(function(res){
+            fetch("https://analizzatore.prezzemolo.org/?url="+this.opts.url).then(function(res){
                 if (!res.ok) throw new Error('server respond with the status code greater than 400.')
                 return res.json()
             }).then(function(res){
