@@ -186,7 +186,7 @@ misskey-post(id="{post().id}")
                 padding:0;
                 > li{
                     margin: 0;
-                    > .content{
+                    .content{
                         max-width: 100%;
                         max-height: 256px;
                     }
