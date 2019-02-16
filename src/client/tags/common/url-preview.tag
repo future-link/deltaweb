@@ -18,7 +18,7 @@ misskey-url-preview
 misskey-url-preview-url
     a(href="{opts.url}",if="{loaded && !embed_player}",target="_blank")
         h1(if="{info.title}") {info.title}
-        .description {info.description}
+        .description {info.description.substr(0, 300)}
     .embed-player-wrapper(if="{embed_player}")
         iframe.embed-player(allowfullscreen, src="https://www.youtube.com/embed/{video_id}",if="{embed_player == 'youtube'}", sandbox="allow-scripts allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin")
     script.
